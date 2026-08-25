@@ -1,7 +1,6 @@
 package DTO;
 
-import java.sql.Date;
-
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,7 +14,7 @@ public class Product {
     private String writer;
     private String content;
     private Date createdAt;
-    private Date updateAT;
+    private Date updatedAt;
     
     public Product(){
         this("(제목없음","(작성자없음","");
