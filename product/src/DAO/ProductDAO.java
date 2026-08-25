@@ -54,8 +54,11 @@ public Product select(int no) {
 
             psmt.setInt(1, no);
 
+            rs = psmt.executeQuery();
+
             if( rs.next() ) {
                 product.setNo( rs.getInt("no") );
+                product.setTitle(rs.getString("title"));
                 product.setWriter( rs.getString("writer") );
                 product.setContent( rs.getString("content") );
                 product.setCreatedAt( rs.getTimestamp("created_at") );
@@ -77,7 +80,7 @@ public Product select(int no) {
 	public int insert(Product product) {
 		int result = 0;			// 결과 : 적용된 데이터 개수
 		
-		String sql = " INSERT INTO board (title, writer, content) "
+		String sql = " INSERT INTO product (title, writer, content) "
 				   + " VALUES( ?, ?, ? ) ";
 		
 		try {
@@ -132,7 +135,7 @@ public Product select(int no) {
      * @param no
      * @return
      */
-    
+
     public int delete(int no) {
            int result = 0;        
            String sql = " DELETE FROM product "
