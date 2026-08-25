@@ -39,7 +39,9 @@ public List<Product> list() {
 
          return productList;
 }
-        public Product select(int no) {
+       
+
+public Product select(int no) {
 
             Product product = new Product();
 
@@ -71,6 +73,7 @@ public List<Product> list() {
 	 * @param board
 	 * @return
 	 */
+
 	public int insert(Product product) {
 		int result = 0;			// 결과 : 적용된 데이터 개수
 		
@@ -100,6 +103,7 @@ public List<Product> list() {
      * @param product
      * @return
      */
+
         public int update(Product product) {
         int result = 0;   
 
@@ -128,6 +132,7 @@ public List<Product> list() {
      * @param no
      * @return
      */
+    
     public int delete(int no) {
            int result = 0;        
            String sql = " DELETE FROM product "
