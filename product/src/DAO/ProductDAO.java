@@ -79,8 +79,8 @@ public Product select(int no) {
 	public int insert(Product product) {
 		int result = 0;			// 결과 : 적용된 데이터 개수
 		
-		String sql = " INSERT INTO product (title, writer, content) "
-				   + " VALUES( ?, ?, ? ) ";
+		String sql = " INSERT INTO product (no, title, writer, content) "
+				   + " VALUES( Product_SEQ.nextval, ?, ?, ? ) ";
 		
 		try {
 			psmt = con.prepareStatement(sql);			// 쿼리 실행 객체 생성

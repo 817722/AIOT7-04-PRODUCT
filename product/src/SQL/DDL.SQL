@@ -21,8 +21,11 @@ CREATE TAble product(
     updated_at          DATE            DEFAULT sysdate
     );
 
+    -- 글 번호 시퀀스 삭제
+    DROP SEQUENCE product_SEQ;
+
     -- 시퀀스
-    CREATE SEQUENCE produt_SEQ
+    CREATE SEQUENCE product_SEQ
     START WITH 1
     INCREMENT BY 1
     NOCYCLE 
