@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,13 @@ import DTO.Product;
 
 public class ProductDAO extends JDBConnection {
     
-     public List<Product> list() {
+public List<Product> list() {
 
-     List<Product> productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         String sql = " SELECT * "
                    + " FROM product ";
-        try {
+            try {
             stmt = con.createStatement(); 
 
             rs = stmt.executeQuery(sql);
@@ -65,6 +66,35 @@ public class ProductDAO extends JDBConnection {
         }
             return product;
     }   
+/**
+	 * 데이터 등록
+	 * @param board
+	 * @return
+	 */
+	public int insert(Product product) {
+		int result = 0;			// 결과 : 적용된 데이터 개수
+		
+		String sql = " INSERT INTO board (title, writer, content) "
+				   + " VALUES( ?, ?, ? ) ";
+		
+		try {
+			psmt = con.prepareStatement(sql);			// 쿼리 실행 객체 생성
+			psmt.setString( 1, product.getTitle() );		// 1번 ? 에 title(제목) 매핑
+			psmt.setString( 2, product.getWriter() );		// 2번 ? 에 writer(작성자) 매핑
+			psmt.setString( 3, product.getContent() );	// 3번 ? 에 content(내용) 매핑
+			result = psmt.executeUpdate();				// SQL 실행 요청
+			// * executeUpdate() 
+			// SQL(INSERT, UPDATE, DELETE) 실행 시 적용된 데이터 개수를 int 타입으로 받아온다.
+			// ex) 게시글 1개 적용 성공 시, result : 1 
+			//				    실패 시, result : 0
+		} catch (Exception e) {
+			System.err.println("게시글 등록 시, 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
     /**
      * 
      * @param product
