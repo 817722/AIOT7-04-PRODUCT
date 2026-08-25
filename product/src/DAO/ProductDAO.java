@@ -72,7 +72,7 @@ public Product select(int no) {
     }   
 /**
 	 * 데이터 등록
-	 * @param board
+	 * @param product
 	 * @return
 	 */
 
