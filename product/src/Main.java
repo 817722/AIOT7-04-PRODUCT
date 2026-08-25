@@ -9,19 +9,11 @@ import service.ProductServicelmpl;
 
 
 public class Main {
-    // 입력 객체
+
     static Scanner sc = new Scanner(System.in);
-    // 상품 목록
     static List<Product> productList = null;
-    // 비즈니스 로직 객체
     static ProductService productService = new ProductServicelmpl();
 
-    // 메뉴 생성
-    // 1. 상품 목록
-    // 2. 상품 조회
-    // 3. 상품 등록
-    // 4. 상품 수정
-    // 5. 상품 삭제
     public static void menu() {
         System.out.println("::::::::: 메인 화면 :::::::::");
         System.out.println("1. 상품 목록");
@@ -30,8 +22,7 @@ public class Main {
         System.out.println("4. 상품 수정");
         System.out.println("5. 상품 삭제");
         System.out.println("0. 프로그램 종료");
-        System.out.println("::::::::: 번호 입력 : ");
-        System.out.println();
+        System.out.print("::::::::: 번호 입력 : ");
     }
 
     /**
@@ -40,22 +31,20 @@ public class Main {
     private static void list() {
         System.out.println();
         System.err.println("::::::::: 상품 목록 :::::::::");
-        // 상품 목록 데이터 요청
-        // productlist에 productService.list를 할당한다.
         productList = productService.list();
-        // 전부 불러오기
         printAll();
     }
+
 
     /**
      * 상품 목록 전체 출력
      */
     private static void printAll() {
-        if (productList == null || productList.isEmpty()) {
-            System.err.println("조회된 상품이 없습니다.");
+        if(productList == null || productList.isEmpty()) {
+            System.err.println("조회된 상품이 없습니다");
             return;
         }
-        // 글 목록 출력
+        // 상품 목록 출력
         for (Product product : productList) {
             print(product);
         }
@@ -143,11 +132,37 @@ public class Main {
         return product;
     }
 
+
+    /**
+     * 상품 등록
+     */
+    public static void update() {
+        System.out.println("::::::::: 상품 등록 :::::::::");
+        System.out.println("상품 번호: ");
+        int no = sc.nextInt();
+        sc.nextLine();
+
+        Product product = input();
+        product.setNo(no);
+
+        // 상품 수정 요청
+        int result = productService.update(product);
+        if (result > 0) {
+            System.out.println("★ 상품이 수정 되었습니다.");
+        } else {
+            System.out.println("★ 상품 수정에 실패하였습니다.");
+        }
+        System.out.println();
+    }
+
+    /**
+     * 상품 정보 삭제
+     */
     public static void delete() {
         System.out.println();
-        System.out.println("::::::::: 게시글 삭제 :::::::::");
+        System.out.println("::::::::: 상품 삭제 :::::::::");
 
-        System.out.println("게시글 번호: ");
+        System.out.println("상품 번호: ");
         int no = sc.nextInt();
         sc.nextLine();
 
@@ -160,14 +175,30 @@ public class Main {
     }
 
 
-
-
-
-
-
-
-
+    
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        int menuNo = 0;
+        do {
+            menu();
+            menuNo = sc.nextInt();
+            sc.nextLine();
+            if(menuNo ==0) break;
+            switch (menuNo) {
+                case 1: list();
+                        break;
+                case 2: select();
+                        break;
+                case 3: insert();
+                        break;
+                case 4: update();
+                        break;
+                case 5: delete();
+                        break;
+                default:
+                    break;
+            }
+        } while (menuNo != 0);
+
+        System.out.println("프로그램을 종료합니다...");
     }
 }

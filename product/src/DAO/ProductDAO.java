@@ -68,13 +68,13 @@ public List<Product> list() {
     }   
 /**
 	 * 데이터 등록
-	 * @param board
+	 * @param product
 	 * @return
 	 */
 	public int insert(Product product) {
 		int result = 0;			// 결과 : 적용된 데이터 개수
 		
-		String sql = " INSERT INTO board (title, writer, content) "
+		String sql = " INSERT INTO product (title, writer, content) "
 				   + " VALUES( ?, ?, ? ) ";
 		
 		try {
