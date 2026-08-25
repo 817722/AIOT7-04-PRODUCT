@@ -39,8 +39,7 @@ public List<Product> list() {
 
          return productList;
 }
-       
-
+        
 public Product select(int no) {
 
             Product product = new Product();
